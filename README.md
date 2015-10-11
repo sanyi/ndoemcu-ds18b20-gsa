@@ -27,7 +27,7 @@ end
 resume(coroutine.create(main))
 ```
 
-The library **requires** to be used from a coroutine like function **main()** from the example. 
+The library **_requires_** to be used from a coroutine like function **main()** from the example. 
 
 Most functions retund **success, result**. Where if status == false the result contains the error.
 The **addr** parameter can be a hexadecimal representation of the device serial ex: "2883AE6F060000E7" or the binary representation of this, the library auto detects the type.
