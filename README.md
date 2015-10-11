@@ -27,5 +27,53 @@ end
 resume(coroutine.create(main))
 ```
 
-The library **requires** to be used from a coroutine like function **main()** from the example.
+The library **requires** to be used from a coroutine like function **main()** from the example. 
+
+Most functions retund **success, result**. Where if status == false the result contains the error.
+The **addr** parameter can be a hexadecimal representation of the device serial ex: "2883AE6F060000E7" or the binary representation of this, the library auto detects the type.
+
+Using the library:
+------------------
+
+```lua
+--load the library
+local sl = require("gsa_ds18b20")
+
+--initialize the pin where the devices are wired
+local pin = 2
+local power = 1
+sl.setup(2)
+
+--list the devices as binary representation
+success, devices_binary = sl.get_devices(pin, 0)
+
+--list the devices as hexadecimal representation
+success, devices_hexa = sl.get_devices(pin, 1)
+
+-- get resolution
+success, resolution = sl.get_resolution(pin, '2883AE6F060000E7', power)
+success, resolution = sl.get_resolution(pin, devices_binary[0], power)
+success, resolution = sl.get_resolution(pin, devices_hexa[0], power)
+
+--set resolution
+sl.set_resolution(pin, '2883AE6F060000E7', sl.RES_9_BIT, power))
+
+-- get temperature for a specific device the temperature is in milli celsius
+success, value = sl.get_temp(pin, '2883AE6F060000E7', power))
+success, value = sl.get_temp(pin, devices_binary[0], power))
+success, value = sl.get_temp(pin, devices_hexa[0], power))
+
+- get temperature for multiple devices
+success, values = sl.get_temperatures(pin, nil, power)) -- will list automatically call get_devices
+success, values = sl.get_temperatures(pin, {'2883AE6F060000E7'}, power))
+success, values = sl.get_temperatures(pin, devices_binary, power))
+success, values = sl.get_temperatures(pin, devices_hexa, power))
+
+--values = { hexadecimal representation of the device : temperature in milli celsius}
+for key,value in pairs(values) do print(key,value) end
+
+
+
+
+     
 
