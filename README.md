@@ -72,8 +72,11 @@ success, values = sl.get_temperatures(pin, devices_hexa, power))
 --values = { hexadecimal representation of the device : temperature in milli celsius}
 for key,value in pairs(values) do print(key,value) end
 
+```
 
-
-
-     
+Other:
+-----
+- this modle was tested with **"NodeMCU 0.9.6 build 20150704  powered by Lua 5.1.4"**, 
+- **get_devices** is not very stable, sometime doesn't return all sensors. I do have this problem even with the default library, so I presume threre is something wrong with the NodeMCU one wire library.
+- even if **get_devices** fails, **get_temp** and **get_temperatures** are working correctly when called with address.
 
