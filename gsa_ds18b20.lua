@@ -83,7 +83,7 @@ function extract_temp(addr, scrp)
         if sgn then temp = -1 * temp end
         temp = temp - 16 + (scrp:byte(SP_COUNT_PER_C) - bit.lshift(scrp:byte(SP_COUNT_REMAIN),7)) / scrp:byte(SP_COUNT_PER_C)
     else
-        temp = msb + lsb * 256
+        temp = lsb + msb * 256
         if (temp > 32767) then temp = temp - 65536 end
     end
     temp = temp * 625
